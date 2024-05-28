@@ -7,12 +7,17 @@
     <h1>Techzenith</h1>
 </header>
 <main>
-    <h1>Home</h1>
+    <h1>Bienvenido {{user.username}}</h1>
+    <p>Este usuario pertenece a los grupose de 
+        {% for group in groups %}
+        {{group}}
+        {% endfor %}
+
+    </p>
 </main>
 <footer>
 
 </footer>
 
-<h1>Hola mundo</h1>
 
 {% endblock %}

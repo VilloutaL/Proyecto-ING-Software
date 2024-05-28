@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+
 
 def index(request):
     data = {}
@@ -17,8 +18,7 @@ def index(request):
             login(request, user)
             if not recordarme:
                 request.session.set_expiry(0)
-            messages.info(request, f'Has iniciado sesion como {username}.')
-            return redirect('/')
+            return redirect('home')
         else:
             messages.error(request, "Nombre de usuario o contraseña incorrecta.")
 
@@ -27,5 +27,21 @@ def index(request):
 @login_required
 def home(request):
     data = {}
+    user = request.user
+    users_group = user.groups.all()
     
+    data["title"] = "Home - Aula virtual"
+    data["user"] = user
+    data["groups"] = users_group
+
     return render(request, "aulaVirtual/home.html", data)
+
+
+def register(request):
+    data = {}
+
+    return HttpResponse("Esta es la pagina de registro")
+
+def change_password(request):
+    data = {}
+    return HttpResponse("Esta es la página de cambio de contraseña")

@@ -1,4 +1,28 @@
 body {
-    background-color: #021430;
+    background-color: #D8E6FE;
+    height: 100vh;
 }
 
+header{
+    height: 20vh;
+    background-color: #021430;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+header img{
+    height: 100%;
+    width: auto;
+}
+
+header h1{
+    color: white;
+    margin: auto 10px auto auto;
+}
+
+#caja-autenticacion{
+    background-color: #021430;
+    display: grid;
+    
+}

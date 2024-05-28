@@ -3,11 +3,12 @@
 
 {% block content %}
 <header>
-    <img src="https://cdn.discordapp.com/attachments/1229914831365083151/1229934981741281410/DALLE.webp?ex=6655be76&is=66546cf6&hm=59d5ff4dbeb526b012dd112812a2a36694155c112ca877f3ba696e7693292f91&" alt="Logo">
-    <h1>Techzenith</h1>
+    <img src="{% static 'aulaVirtual/media/Logo-Techzenith.png' %}" alt="Logo Techzenith">
+    <h1>Techzenith - Aula virtual</h1>
 </header>
 <main>
-    <div>
+    <div id="caja-autenticacion">
+        <img src="{% static 'aulaVirtual/media/biblioteca.jpg' %}" alt="Imagen decorativa de una biblioteca">
         <form method="post" action="">
             {% csrf_token %}
             <div>
@@ -24,19 +25,21 @@
                 <button type="submit">Iniciar sesión</button>
             </div>
         </form>
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+        <div>
+            <a href="/change_password">Olvide mi contraseña</a>
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
     </div>
 </main>
 <footer>
 
 </footer>
 
-<h1>Hola mundo</h1>
 
 {% endblock %}
