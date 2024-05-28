@@ -1,0 +1,56 @@
+{% extends 'aulaVirtual/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<header>
+    <img src="{% static 'aulaVirtual/media/Logo-Techzenith.png' %}" alt="Logo Techzenith">
+    <h1>Techzenith - Aula virtual</h1>
+</header>
+<main>
+    <section id="registro">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div>
+                <input type="text" id="username" name="username">
+                <label for="username">Nombre de usuario:</label>
+            </div>
+            <div>
+                <input type="text" id="first_name" name="first_name">
+                <label for="first_name">Nombre: </label>
+            </div>
+            <div>
+                <input type="text" name="last_name" id="last_name">
+                <label for="last_name">Apellido:</label>
+            </div>
+            <div>
+                <input type="email" name="correo" id="correo">
+                <label for="correo">Correo electronico: </label>
+            </div>
+            <div>
+                <input type="email" name="correo2" id="correo2">
+                <label for="correo2">Repita su correo: </label>
+            </div>
+            <div>
+                <input type="password" name="clave" id="clave">
+                <label for="clave">Contraseña</label>
+            </div>
+            <div>
+                <input type="password" name="clave2" id="clave2">
+                <label for="clave2">Repita su contraseña</label>
+            </div>
+            <div>
+                <button type="submit">Registrarse</button>
+            </div>
+
+            
+        </form>
+
+    </section>
+</main>
+<footer>
+
+</footer>
+
+
+{% endblock %} 

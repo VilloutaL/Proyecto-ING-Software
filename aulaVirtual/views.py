@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -38,9 +39,28 @@ def home(request):
 
 
 def register(request):
-    data = {}
+    if request.method == 'POST':
+        username = request.POST['username']
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['correo']
+        email2 = request.POST['correo2']
+        clave = request.POST['clave']
+        clave2 = request.POST['clave2']
 
-    return HttpResponse("Esta es la pagina de registro")
+        if email != email2:
+            messages.error(request, "Los correos no coinciden")
+        elif clave != clave2:
+            messages.error(request, "Las constraseñas no coinciden")
+        else:
+            user = User.objects.create_user(username, email, clave)
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
+            login(request, user)
+            return redirect('home')
+        
+    return render(request, "aulaVirtual/registro.html", {})
 
 def change_password(request):
     data = {}
