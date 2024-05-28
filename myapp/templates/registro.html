@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Registrarse</button>
+</form>
+
+<a href="{% url 'inicio_sesion' %}" class="btn btn-secondary">Volver al inicio de sesión</a>
+
+
+{% endblock %}
