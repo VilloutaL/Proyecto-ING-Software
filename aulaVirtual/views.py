@@ -40,6 +40,8 @@ def home(request):
     return render(request, "aulaVirtual/home.html", data)
 
 def register(request):
+    data = {}
+    data["titulo_de_pagina"] = "Registro - Aula virtual"
     if request.method == 'POST':
         username = request.POST['username']
         first_name = request.POST['first_name']
@@ -84,7 +86,7 @@ def register(request):
             messages.success(request, "Registro exitoso. Por favor, revisa tu correo para verificar tu cuenta.")
             return redirect('registro')
 
-    return render(request, "aulaVirtual/registro.html", {})
+    return render(request, "aulaVirtual/registro.html", data)
 
 def verify(request, uid):
     try:
@@ -101,6 +103,8 @@ def verify(request, uid):
     return redirect('index')
 
 def cambiar_clave(request):
+    data = {}
+    data["titulo_de_pagina"] = "Cambiar clave - Aula virtual"
     if request.method == 'POST':
         email = request.POST['correo']
 
@@ -117,7 +121,7 @@ def cambiar_clave(request):
         else:
             messages.error(request, "Correo invalido, por favor revisalo.")
 
-    data = {}
+    
     return render(request, 'aulaVirtual/cambiar-clave.html', data)
 
 def cambiar_clave_verificado(request, uid):
@@ -137,4 +141,5 @@ def cambiar_clave_verificado(request, uid):
             except User.DoesNotExist:
                 messages.error(request, "Usuario no encontrado.")
     data = {}
+    data["titulo_de_pagina"] = "Cambiar clave - Aula virtual"
     return render(request, 'aulaVirtual/cambiar-clave-verificado.html', data)
