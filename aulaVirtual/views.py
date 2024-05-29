@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 
+#==========================================================================
 
 def index(request):
     data = {}
@@ -51,16 +53,43 @@ def register(request):
         if email != email2:
             messages.error(request, "Los correos no coinciden")
         elif clave != clave2:
-            messages.error(request, "Las constraseñas no coinciden")
+            messages.error(request, "Las contraseñas no coinciden")
+        elif  User.objects.filter(username=username).exists():
+            messages.error(request, "El nombre de usuario ya está en uso")
+        elif User.objects.filter(email=email).exists():
+            messages.error(request, "El correo electrónico ya está en uso")
         else:
             user = User.objects.create_user(username, email, clave)
             user.first_name = first_name
             user.last_name = last_name
+            user.is_active = False  # Desactivar la cuenta hasta que el usuario verifique su correo
             user.save()
-            login(request, user)
-            return redirect('home')
-        
+
+            # Enviar correo de verificación
+            subject = 'Verifica tu cuenta'
+            message = f'Por favor, haz clic en el siguiente enlace para verificar tu cuenta: http://127.0.0.1:8000/verify/{user.id}/'
+            from_email = 'tu_email@gmail.com'
+            recipient_list = [email]
+            send_mail(subject, message, from_email, recipient_list)
+
+            messages.success(request, "Registro exitoso. Por favor, revisa tu correo para verificar tu cuenta.")
+            return redirect('index')
+
     return render(request, "aulaVirtual/registro.html", {})
+
+def verify(request, uid):
+    try:
+        user = User.objects.get(pk=uid)
+        if user.is_active:
+            messages.info(request, "Esta cuenta ya ha sido activada.")
+        else:
+            user.is_active = True
+            user.save()
+            messages.success(request, "Cuenta verificada exitosamente. Ahora puedes iniciar sesión.")
+    except User.DoesNotExist:
+        messages.error(request, "Usuario no encontrado.")
+
+    return redirect('index')
 
 def change_password(request):
     data = {}
