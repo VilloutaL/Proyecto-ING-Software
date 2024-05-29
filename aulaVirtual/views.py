@@ -91,6 +91,38 @@ def verify(request, uid):
 
     return redirect('index')
 
-def change_password(request):
+def cambiar_clave(request):
+    if request.method == 'POST':
+        email = request.POST['correo']
+
+        if User.objects.filter(email=email).exists():
+            user = User.objects.get(email=email)
+            subject = 'Cambio de contraseña'
+            message = f'Por favor, haz clic en el siguiente enlace para cambiar tu contraseña: http://127.0.0.1:8000/cambio-clave-verificado/{user.id}/ '
+            from_email = 'saad11012002@gmail.com'
+            recipient_list = [email]
+            send_mail(subject, message, from_email, recipient_list)
+
+            messages.success(request, "Por favor, revisa tu correo para continuar el proceso.")
+            return redirect('index')
+
     data = {}
-    return HttpResponse("Esta es la página de cambio de contraseña")
+    return render(request, 'aulaVirtual/cambiar-clave.html', data)
+
+def cambiar_clave_verificado(request, uid):
+    if request.method == 'POST':
+        clave = request.POST['clave']
+        clave2 = request.POST['clave2']
+
+        if clave != clave2:
+            messages.error(request, "Las contraseñas no coinciden")
+        else:
+            try:
+                user = User.objects.get(pk=uid)
+                user.set_password(clave)
+                user.save()
+                messages.info(request, "Contraseña actualizada con exito")
+            except User.DoesNotExist:
+                messages.error(request, "Usuario no encontrado.")
+    data = {}
+    return render(request, 'aulaVirtual/cambiar-clave-verificado.html', data)
