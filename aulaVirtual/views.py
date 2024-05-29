@@ -8,12 +8,16 @@ from django.core.mail import send_mail
 #==========================================================================
 
 def index(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+     
     data = {}
     data["titulo_de_pagina"] = "Inicio - Aula virtual"
+    
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        recordarme = request.POST.get('recordarme', False)
+        recordarme = request.POST.get('recordarme') == 'on'
 
         user = authenticate(request, username=username, password=password)
 
@@ -21,6 +25,8 @@ def index(request):
             login(request, user)
             if not recordarme:
                 request.session.set_expiry(0)
+            else:
+                request.session.set_expiry(None)  # Usa la duración predeterminada de la sesión
             return redirect('home')
         else:
             messages.error(request, "Nombre de usuario o contraseña incorrecta.")
