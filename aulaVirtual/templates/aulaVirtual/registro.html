@@ -9,43 +9,49 @@
 </header>
 <main>
     <section id="registro">
-        <form action="" method="post">
+        <h2>Nuevo registro</h2>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li id="mensaje"> {{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form action="" method="post" class="form-floating">
             {% csrf_token %}
-            <div>
-                <input type="text" id="username" name="username">
+            <div class="form-floating">
+                <input class="form-control" type="text" id="username" name="username" placeholder="username"> 
                 <label for="username">Nombre de usuario:</label>
             </div>
-            <div>
-                <input type="text" id="first_name" name="first_name">
+            <div class="form-floating">
+                <input class="form-control" type="text" id="first_name" name="first_name" placeholder="first_name">
                 <label for="first_name">Nombre: </label>
             </div>
-            <div>
-                <input type="text" name="last_name" id="last_name">
+            <div class="form-floating">
+                <input class="form-control" type="text" name="last_name" id="last_name" placeholder="last_name">
                 <label for="last_name">Apellido:</label>
             </div>
-            <div>
-                <input type="email" name="correo" id="correo">
+            <div class="form-floating">
+                <input class="form-control" type="email" name="correo" id="correo" placeholder="name@example.com">
                 <label for="correo">Correo electronico: </label>
             </div>
-            <div>
-                <input type="email" name="correo2" id="correo2">
+            <div class="form-floating">
+                <input class="form-control" type="email" name="correo2" id="correo2" placeholder="name@example.com">
                 <label for="correo2">Repita su correo: </label>
             </div>
-            <div>
-                <input type="password" name="clave" id="clave">
+            <div class="form-floating">
+                <input class="form-control" type="password" name="clave" id="clave" placeholder="password">
                 <label for="clave">Contraseña</label>
             </div>
-            <div>
-                <input type="password" name="clave2" id="clave2">
+            <div class="form-floating">
+                <input class="form-control" type="password" name="clave2" id="clave2" placeholder="password">
                 <label for="clave2">Repita su contraseña</label>
             </div>
             <div>
-                <button type="submit">Registrarse</button>
+                <button type="submit" class="btn btn-light">Registrarse</button>
             </div>
-
-            
         </form>
-
     </section>
 </main>
 <footer>

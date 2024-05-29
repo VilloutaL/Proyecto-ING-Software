@@ -9,20 +9,26 @@
 </header>
 <main>
     <section id="cambio-clave1">
+        <h2>Ingresa nuevas credenciales </h2>
+        {% if messages %}
+            {% for message in messages %}
+                <p id="mensaje">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
         <form action="" method="post">
             {% csrf_token %}
             
-            <div>
-                <input type="password" name="clave" id="clave">
+            <div class="form-floating">
+                <input class="form-control" type="password" name="clave" id="clave" placeholder="password">
                 <label for="clave">Contraseña</label>
             </div>
-            <div>
-                <input type="password" name="clave2" id="clave2">
+            <div class="form-floating">
+                <input class="form-control" type="password" name="clave2" id="clave2" placeholder="password">
                 <label for="clave2">Repita su contraseña</label>
             </div>
-            
+
             <div>
-                <button type="submit">Registrarse</button>
+                <button type="submit" class="btn btn-light">Guardar</button>
             </div>
 
         </form>

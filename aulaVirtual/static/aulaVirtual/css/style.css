@@ -3,6 +3,10 @@ body {
     height: 100vh;
 }
 
+main{
+    min-height: 85vh;
+}
+
 header{
     height: 15vh;
     background-color: #021430;
@@ -84,4 +88,55 @@ header h1{
     color: #E22012;
     margin: 10px;
     font-weight: bold;
+}
+
+#registro {
+    width: 90vw; height: auto;
+    margin: auto;
+    padding: 20px 0 40px;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#registro form{
+    height: auto; width: 60%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+}
+
+#registro form div{
+    margin-top: 10px;
+}
+
+#cambio-clave1{
+    min-height: 85vh;
+    width: 90vw; height: auto;
+    margin: auto;
+    padding: 20px 0 40px;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: start;
+    align-items: center;
+}
+
+#cambio-clave1 h2{
+    margin-bottom: 20px;
+}
+
+#cambio-clave1 form{
+    height: auto; width: 60%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+}
+
+#cambio-clave1 form div{
+    margin-bottom: 20px;
 }

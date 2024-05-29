@@ -9,16 +9,26 @@
 </header>
 <main>
     <section id="cambio-clave1">
+        <h2>Cambiar contraseña</h2>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li id="mensaje"> {{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
         <form action="" method="post">
             {% csrf_token %}
             
-            <div>
-                <input type="email" name="correo" id="correo">
+            
+            <div class="form-floating">
+                <input class="form-control" type="email" name="correo" id="correo" placeholder="name@example.com">
                 <label for="correo">Correo electronico: </label>
             </div>
             
             <div>
-                <button type="submit">Registrarse</button>
+                <button type="submit" class="btn btn-light">Enviar</button>
             </div>
 
         </form>

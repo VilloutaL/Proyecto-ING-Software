@@ -39,7 +39,6 @@ def home(request):
 
     return render(request, "aulaVirtual/home.html", data)
 
-
 def register(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -50,15 +49,25 @@ def register(request):
         clave = request.POST['clave']
         clave2 = request.POST['clave2']
 
+        email1_flag = True
+        email2_flag = True
+        pass_flag = True
+        user_flag = True
+
+
         if email != email2:
             messages.error(request, "Los correos no coinciden")
-        elif clave != clave2:
+            email1_flag = False
+        if clave != clave2:
             messages.error(request, "Las contraseñas no coinciden")
-        elif  User.objects.filter(username=username).exists():
+            pass_flag = False
+        if  User.objects.filter(username=username).exists():
             messages.error(request, "El nombre de usuario ya está en uso")
-        elif User.objects.filter(email=email).exists():
+            user_flag = False
+        if User.objects.filter(email=email).exists():
             messages.error(request, "El correo electrónico ya está en uso")
-        else:
+            email2_flag = False
+        if email1_flag and email2_flag and user_flag and pass_flag:
             user = User.objects.create_user(username, email, clave)
             user.first_name = first_name
             user.last_name = last_name
@@ -73,7 +82,7 @@ def register(request):
             send_mail(subject, message, from_email, recipient_list)
 
             messages.success(request, "Registro exitoso. Por favor, revisa tu correo para verificar tu cuenta.")
-            return redirect('index')
+            return redirect('registro')
 
     return render(request, "aulaVirtual/registro.html", {})
 
@@ -105,6 +114,8 @@ def cambiar_clave(request):
 
             messages.success(request, "Por favor, revisa tu correo para continuar el proceso.")
             return redirect('index')
+        else:
+            messages.error(request, "Correo invalido, por favor revisalo.")
 
     data = {}
     return render(request, 'aulaVirtual/cambiar-clave.html', data)
@@ -122,6 +133,7 @@ def cambiar_clave_verificado(request, uid):
                 user.set_password(clave)
                 user.save()
                 messages.info(request, "Contraseña actualizada con exito")
+                return redirect("index")
             except User.DoesNotExist:
                 messages.error(request, "Usuario no encontrado.")
     data = {}
