@@ -3,6 +3,5 @@ from .views import authView, home
 urlpatterns = [
     path("",home, name="home"),
     path("singup/", authView, name = "authView"),
-    path("accounts/", include("django.contrib.auth.urls")),
 
 ]

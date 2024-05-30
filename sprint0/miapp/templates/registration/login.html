@@ -1,9 +1,42 @@
 {% extends "base.html" %}
-{% block content %}
+{% load static %}
 
-<form method="post">
-    {% csrf_token %}
-    {{form}}
-    <button type="submit">Iniciar sesion</button>
-</form>
-{%endblock %}
+{% block content %}
+<header>
+    <img src="{% static 'miapp/Logo-Techzenith.png' %}" alt="Logo Techzenith">
+    <h1>Techzenith - Aula virtual</h1>
+</header>
+<main>
+    <div id="caja-autenticacion">
+        <img src="{% static 'miapp/biblioteca.jpg' %}" alt="Imagen decorativa de una biblioteca">
+        <form method="post" action="">
+            {% csrf_token %}
+            <div>
+                <label for="username">Nombre de usuario: </label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div>
+                <label for="password">Contraseña: </label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="btns-form">
+                <button type="submit" id="login" class="btn btn-outline-light">Iniciar sesión</button>
+            </div>
+        </form>
+        <div class="botones">
+            <a href="/change_password">Olvide mi contraseña</a>
+            <a href="/singup">Registrarme</a>
+            {% if messages %}
+                {% for message in messages %}
+                    <p id="mensaje">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</main>
+<footer>
+
+</footer>
+
+
+{% endblock %}
