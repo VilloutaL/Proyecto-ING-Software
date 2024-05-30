@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.urls import reverse
 from .forms import CustomUserCreationForm
+from django.core.mail import send_mail
+from django.utils.crypto import get_random_string
 # Create your views here.
 
 @login_required
@@ -18,7 +20,7 @@ def authView(request):
         if form.is_valid():  
             user = form.save()
             login(request, user)
-            return redirect("/")
+            return redirect("/accounts/login")
             
     else:
         form = CustomUserCreationForm() 
@@ -27,3 +29,9 @@ def authView(request):
         'form':form
     }
     return render(request, "registration/signup.html", context)
+
+
+def custom_logout(request):
+    logout(request)
+    return redirect('/')
+
