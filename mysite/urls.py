@@ -24,4 +24,7 @@ urlpatterns = [
     path('registro/', views.registro, name='registro'),
     path('inicio_sesion/', views.inicio_sesion, name='inicio_sesion'),
     path('main/', views.main, name='main'),
+    path('profesores/', views.Profesores, name='profesores'),
+    path('administradores/', views.Administradores, name='administradores'),
+    path('RecuperarContraseña/', views.RecuperarContraseña, name='RecuperarContraseña'),
 ]
