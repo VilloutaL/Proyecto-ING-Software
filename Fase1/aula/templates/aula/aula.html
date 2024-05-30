@@ -1,0 +1,94 @@
+{% extends 'aula/base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula Online</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            display: flex;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            padding: 20px;
+        }
+        .welcome {
+            margin-bottom: 20px;
+        }
+        .course-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .course-list li {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Aula Online</h1>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#cursos">Cursos</a>
+            <a href="#perfil">Perfil</a>
+            <a href="#logout">Logout</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="welcome">
+            <h2>Bienvenido al Aula Online</h2>
+            <p>Accede a tus cursos y empieza a aprender hoy mismo.</p>
+        </div>
+        <div class="courses">
+            <h3>Cursos Disponibles</h3>
+            <ul class="course-list">
+                <li>
+                    <h4>Curso de Programación en Python</h4>
+                    <p>Aprende los fundamentos de la programación en Python, uno de los lenguajes más populares.</p>
+                </li>
+                <li>
+                    <h4>Curso de Desarrollo Web</h4>
+                    <p>Domina el desarrollo web con HTML, CSS y JavaScript.</p>
+                </li>
+                <li>
+                    <h4>Curso de Bases de Datos</h4>
+                    <p>Conoce las bases de datos relacionales y cómo gestionarlas eficientemente.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}
