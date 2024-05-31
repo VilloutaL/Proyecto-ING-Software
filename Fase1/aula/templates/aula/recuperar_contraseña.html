@@ -50,7 +50,7 @@
 <body>
     <div class="container">
         <h2>Recuperar Contraseña</h2>
-        <form action="/recuperar_contraseña" method="post">
+        <form action="/recuperar_contraseña/" method="post"> {% csrf_token %}
             <input type="email" name="email" placeholder="Ingresa tu email" required>
             <button type="submit">Recuperar Contraseña</button>
         </form>

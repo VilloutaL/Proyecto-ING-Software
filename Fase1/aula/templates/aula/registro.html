@@ -68,8 +68,8 @@
 <body>
     <div class="container">
         <h2>Registro de Usuario</h2>
-        <form action="/inicio" method="post" onsubmit="return validateForm()">
-            <input type="text" name="nombreCompleto" placeholder="Nombre completo" required>
+        <form action="/registro/" method="post" onsubmit="return validateForm()"> {% csrf_token %}
+            <input type="text" name="nombreCompleto" placeholder="Rut" required>
             <input type="email" name="email" placeholder="Correo electrónico" required>
             <input type="password" id="password" name="password" placeholder="Contraseña" required>
             <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmar contraseña" required>

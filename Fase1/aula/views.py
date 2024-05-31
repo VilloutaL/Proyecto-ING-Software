@@ -21,6 +21,7 @@ def inicio (request):
     
     #return render(request,'aula/inicio.html')
 def registro (request):
+    
     return render(request,'aula/registro.html')
 def recuperar_contraseña (request):
     return render(request,'aula/recuperar_contraseña.html')
